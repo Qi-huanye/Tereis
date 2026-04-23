@@ -8,7 +8,7 @@
             "program": "${workspaceFolder}\\.vscode-build\\mingw\\Tetris.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}\\src",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",

@@ -6,10 +6,14 @@ $ErrorActionPreference = "Stop"
 
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectDir = Join-Path $Root "src"
+$IncludeDir = Join-Path $ProjectDir "include"
+$SourceDir = Join-Path $ProjectDir "source"
+$ResourceDir = Join-Path $ProjectDir "resources"
 $AssetsDir = Join-Path $Root "assets"
+$IconDir = Join-Path $AssetsDir "icons"
 $BuildDir = Join-Path $Root ".vscode-build\mingw"
 $ExePath = Join-Path $BuildDir "Tetris.exe"
-$RcPath = Join-Path $ProjectDir "Tetris.rc"
+$RcPath = Join-Path $ResourceDir "Tetris.rc"
 $RcUtf8Path = Join-Path $BuildDir "Tetris.utf8.rc"
 $ResObjPath = Join-Path $BuildDir "Tetris.res.o"
 
@@ -58,22 +62,22 @@ foreach ($Candidate in $WindresCandidates) {
 New-Item -ItemType Directory -Force -Path $BuildDir | Out-Null
 
 $Sources = @(
-    (Join-Path $ProjectDir "stdafx.cpp"),
-    (Join-Path $ProjectDir "Tetris.cpp"),
-    (Join-Path $ProjectDir "TetrisLogic.cpp"),
-    (Join-Path $ProjectDir "TetrisRender.cpp")
+    (Join-Path $SourceDir "stdafx.cpp"),
+    (Join-Path $SourceDir "Tetris.cpp"),
+    (Join-Path $SourceDir "TetrisLogic.cpp"),
+    (Join-Path $SourceDir "TetrisRender.cpp")
 )
 
 $LinkInputs = @()
 
 if ($Windres -and (Test-Path $RcPath)) {
     $RcContent = Get-Content -Path $RcPath -Raw -Encoding Unicode
-    $RcContent = $RcContent.Replace('"Tetris.ico"', ('"' + ((Join-Path $AssetsDir "Tetris.ico") -replace '\\', '/') + '"'))
-    $RcContent = $RcContent.Replace('"small.ico"', ('"' + ((Join-Path $AssetsDir "small.ico") -replace '\\', '/') + '"'))
+    $RcContent = $RcContent.Replace('"Tetris.ico"', ('"' + ((Join-Path $IconDir "Tetris.ico") -replace '\\', '/') + '"'))
+    $RcContent = $RcContent.Replace('"small.ico"', ('"' + ((Join-Path $IconDir "small.ico") -replace '\\', '/') + '"'))
     [System.IO.File]::WriteAllText($RcUtf8Path, $RcContent, [System.Text.UTF8Encoding]::new($false))
 
     & $Windres `
-        -I $ProjectDir `
+        -I $IncludeDir `
         $RcUtf8Path `
         -O coff `
         -o $ResObjPath
@@ -94,7 +98,7 @@ if ($Windres -and (Test-Path $RcPath)) {
     -DUNICODE `
     -D_UNICODE `
     -D_WINDOWS `
-    -I $ProjectDir `
+    -I $IncludeDir `
     @Sources `
     @LinkInputs `
     -lwinmm `
@@ -107,5 +111,5 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($Run) {
-    Start-Process -FilePath $ExePath -WorkingDirectory $ProjectDir
+    Start-Process -FilePath $ExePath -WorkingDirectory $Root
 }

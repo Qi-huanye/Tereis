@@ -19,8 +19,14 @@
 
 ```text
 Tereis/
-├─ src/                  源代码
-├─ assets/               图标、背景等资源文件
+├─ src/
+│  ├─ include/           头文件
+│  ├─ source/            源文件
+│  └─ resources/         Windows 资源脚本
+├─ assets/
+│  ├─ icons/             图标资源
+│  ├─ images/            图片资源
+│  └─ audio/             音频资源
 ├─ .vscode/              VS Code 配置
 ├─ .vscode-build/        本地构建输出目录
 ├─ report/               实验报告材料与草稿
@@ -88,9 +94,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-mingw.ps1 -Run
 
 ## 资源文件说明
 
-项目包含 Windows 资源文件 `src/Tetris.rc`，其中定义了图标、菜单、快捷键和关于框等内容。
+项目包含 Windows 资源文件 `src/resources/Tetris.rc`，其中定义了图标、菜单、快捷键和关于框等内容。
 
-由于原始 `Tetris.rc` 为 UTF-16 编码，当前构建脚本会在编译时临时转换资源文件编码，并将 `assets/` 中的图标文件一起编译进最终程序，因此资源不再被跳过。
+由于原始 `Tetris.rc` 为 UTF-16 编码，当前构建脚本会在编译时临时转换资源文件编码，并将 `assets/icons/` 中的图标文件一起编译进最终程序，因此资源不再被跳过。
 
 ## 报告目录
 
@@ -119,4 +125,3 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-mingw.ps1 -Run
 - 完善分数与状态提示
 - 增加创新功能
 - 补充测试截图和实验分析
-
