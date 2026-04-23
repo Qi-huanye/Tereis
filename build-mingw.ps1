@@ -6,8 +6,12 @@ $ErrorActionPreference = "Stop"
 
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectDir = Join-Path $Root "src"
+$AssetsDir = Join-Path $Root "assets"
 $BuildDir = Join-Path $Root ".vscode-build\mingw"
 $ExePath = Join-Path $BuildDir "Tetris.exe"
+$RcPath = Join-Path $ProjectDir "Tetris.rc"
+$RcUtf8Path = Join-Path $BuildDir "Tetris.utf8.rc"
+$ResObjPath = Join-Path $BuildDir "Tetris.res.o"
 
 $GxxCandidates = @(
     "g++.exe",
@@ -32,6 +36,25 @@ if (-not $Gxx) {
     throw "g++.exe not found. Add MinGW to PATH or install it at C:\mingw64\bin\g++.exe."
 }
 
+$WindresCandidates = @(
+    "windres.exe",
+    "C:\mingw64\bin\windres.exe"
+)
+
+$Windres = $null
+foreach ($Candidate in $WindresCandidates) {
+    try {
+        $Resolved = Get-Command $Candidate -ErrorAction Stop
+        $Windres = $Resolved.Source
+        break
+    } catch {
+        if (Test-Path $Candidate) {
+            $Windres = $Candidate
+            break
+        }
+    }
+}
+
 New-Item -ItemType Directory -Force -Path $BuildDir | Out-Null
 
 $Sources = @(
@@ -40,6 +63,27 @@ $Sources = @(
     (Join-Path $ProjectDir "TetrisLogic.cpp"),
     (Join-Path $ProjectDir "TetrisRender.cpp")
 )
+
+$LinkInputs = @()
+
+if ($Windres -and (Test-Path $RcPath)) {
+    $RcContent = Get-Content -Path $RcPath -Raw -Encoding Unicode
+    $RcContent = $RcContent.Replace('"Tetris.ico"', ('"' + ((Join-Path $AssetsDir "Tetris.ico") -replace '\\', '/') + '"'))
+    $RcContent = $RcContent.Replace('"small.ico"', ('"' + ((Join-Path $AssetsDir "small.ico") -replace '\\', '/') + '"'))
+    [System.IO.File]::WriteAllText($RcUtf8Path, $RcContent, [System.Text.UTF8Encoding]::new($false))
+
+    & $Windres `
+        -I $ProjectDir `
+        $RcUtf8Path `
+        -O coff `
+        -o $ResObjPath
+
+    if ($LASTEXITCODE -ne 0) {
+        exit $LASTEXITCODE
+    }
+
+    $LinkInputs += $ResObjPath
+}
 
 & $Gxx `
     -std=c++17 `
@@ -52,6 +96,7 @@ $Sources = @(
     -D_WINDOWS `
     -I $ProjectDir `
     @Sources `
+    @LinkInputs `
     -lwinmm `
     -lgdi32 `
     -luser32 `
