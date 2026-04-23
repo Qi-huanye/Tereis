@@ -8,7 +8,7 @@
 - [x] `MyRegisterClass` - `src/source/Tetris.cpp`
 - [x] `InitInstance` - `src/source/Tetris.cpp`
 - [x] `WndProc` - `src/source/Tetris.cpp`
-- [ ] `About` - `src/source/Tetris.cpp`
+- [x] `About` - `src/source/Tetris.cpp`
 
 ## 第二阶段：游戏区域与状态初始化
 

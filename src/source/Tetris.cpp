@@ -146,7 +146,19 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     UNREFERENCED_PARAMETER(lParam);
     // TODO(作业5): 补全“关于”对话框的消息处理。
     UNREFERENCED_PARAMETER(hDlg);
-    UNREFERENCED_PARAMETER(message);
-    UNREFERENCED_PARAMETER(wParam);
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        return (INT_PTR)TRUE;
+
+    case WM_COMMAND:
+        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            return (INT_PTR)TRUE;
+        }
+        break;
+    }
+
     return (INT_PTR)FALSE;
 }
