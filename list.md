@@ -4,8 +4,8 @@
 
 简要说明：完成程序入口、主窗口创建、消息循环和基础对话框处理。
 
-- [ ] `_tWinMain` - `src/source/Tetris.cpp`
-- [ ] `MyRegisterClass` - `src/source/Tetris.cpp`
+- [x] `_tWinMain` - `src/source/Tetris.cpp`
+- [x] `MyRegisterClass` - `src/source/Tetris.cpp`
 - [ ] `InitInstance` - `src/source/Tetris.cpp`
 - [ ] `WndProc` - `src/source/Tetris.cpp`
 - [ ] `About` - `src/source/Tetris.cpp`
