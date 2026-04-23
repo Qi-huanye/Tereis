@@ -77,6 +77,7 @@ if ($Windres -and (Test-Path $RcPath)) {
     [System.IO.File]::WriteAllText($RcUtf8Path, $RcContent, [System.Text.UTF8Encoding]::new($false))
 
     & $Windres `
+        --codepage 65001 `
         -I $IncludeDir `
         $RcUtf8Path `
         -O coff `
