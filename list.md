@@ -1,51 +1,53 @@
 # 函数 TODO 分阶段清单
 
+说明：项目整体仍划分为 6 个阶段，便于按模块推进；每个阶段内的函数顺序尽量与源码实现顺序和依赖关系保持一致。
+
 ## 第一阶段：窗口创建与程序框架搭建
 
-简要说明：完成程序入口、主窗口创建、消息循环和基础对话框处理。
+简要说明：完成程序入口、窗口类注册、主窗口创建、消息循环以及基础对话框处理。
 
-- [x] `_tWinMain` - `src/source/Tetris.cpp`
-- [x] `MyRegisterClass` - `src/source/Tetris.cpp`
-- [x] `InitInstance` - `src/source/Tetris.cpp`
-- [x] `WndProc` - `src/source/Tetris.cpp`
-- [x] `About` - `src/source/Tetris.cpp`
+- [x] `1. _tWinMain` - `src/source/Tetris.cpp`
+- [x] `2. MyRegisterClass` - `src/source/Tetris.cpp`
+- [x] `3. InitInstance` - `src/source/Tetris.cpp`
+- [x] `4. WndProc` - `src/source/Tetris.cpp`
+- [x] `5. About` - `src/source/Tetris.cpp`
 
-## 第二阶段：游戏区域与状态初始化
+## 第二阶段：基础碰撞判断
 
-简要说明：完成游戏初始状态建立和重新开始相关逻辑。
+简要说明：先完成活动方块的基础移动可行性判断，为后续移动、旋转和落地逻辑提供前置条件。
 
-- [ ] `Restart` - `src/source/TetrisLogic.cpp`
+- [x] `6. CanMoveDown` - `src/source/TetrisLogic.cpp`
+- [ ] `7. CanMoveLeft` - `src/source/TetrisLogic.cpp`
+- [ ] `8. CanMoveRight` - `src/source/TetrisLogic.cpp`
 
-## 第三阶段：方块生成、移动与旋转
+## 第三阶段：方块移动与旋转
 
-简要说明：完成方块的基础操作，包括下落、左右移动、旋转和快速到底。
+简要说明：在可移动判断完成后，实现方块的下移、左移、右移、旋转和一键到底操作。
 
-- [ ] `MoveDown` - `src/source/TetrisLogic.cpp`
-- [ ] `MoveLeft` - `src/source/TetrisLogic.cpp`
-- [ ] `MoveRight` - `src/source/TetrisLogic.cpp`
-- [ ] `Rotate` - `src/source/TetrisLogic.cpp`
-- [ ] `DropDown` - `src/source/TetrisLogic.cpp`
+- [ ] `9. MoveDown` - `src/source/TetrisLogic.cpp`
+- [ ] `10. MoveLeft` - `src/source/TetrisLogic.cpp`
+- [ ] `11. MoveRight` - `src/source/TetrisLogic.cpp`
+- [ ] `12. Rotate` - `src/source/TetrisLogic.cpp`
+- [ ] `13. DropDown` - `src/source/TetrisLogic.cpp`
 
-## 第四阶段：碰撞检测与方块固定
+## 第四阶段：方块固定与游戏状态
 
-简要说明：完成越界判断、碰撞检测、方块落地固定和结束判定。
+简要说明：完成方块落地后的固定、游戏结束判断、预测落点与重新开始等状态控制逻辑。
 
-- [ ] `CanMoveDown` - `src/source/TetrisLogic.cpp`
-- [ ] `CanMoveLeft` - `src/source/TetrisLogic.cpp`
-- [ ] `CanMoveRight` - `src/source/TetrisLogic.cpp`
-- [ ] `Fixing` - `src/source/TetrisLogic.cpp`
-- [ ] `GameOver` - `src/source/TetrisLogic.cpp`
+- [ ] `14. Fixing` - `src/source/TetrisLogic.cpp`
+- [ ] `17. GameOver` - `src/source/TetrisLogic.cpp`
+- [ ] `18. ComputeTarget` - `src/source/TetrisLogic.cpp`
+- [ ] `19. Restart` - `src/source/TetrisLogic.cpp`
 
-## 第五阶段：消除逻辑与分数系统
+## 第五阶段：消行与得分逻辑
 
-简要说明：完成消行、行下移和得分更新等核心反馈机制。
+简要说明：完成删除单行、批量消行以及相关分数更新逻辑。
 
-- [ ] `DeleteOneLine` - `src/source/TetrisLogic.cpp`
-- [ ] `DeleteLines` - `src/source/TetrisLogic.cpp`
+- [ ] `15. DeleteOneLine` - `src/source/TetrisLogic.cpp`
+- [ ] `16. DeleteLines` - `src/source/TetrisLogic.cpp`
 
-## 第六阶段：界面绘制与扩展功能
+## 第六阶段：界面绘制与整体完善
 
-简要说明：完成游戏界面绘制，并实现落点预测等增强功能。
+简要说明：完成最终游戏界面绘制，并与前面的逻辑配合形成可运行的完整项目。
 
-- [ ] `ComputeTarget` - `src/source/TetrisLogic.cpp`
-- [ ] `TDrawScreen` - `src/source/TetrisRender.cpp`
+- [ ] `20. TDrawScreen` - `src/source/TetrisRender.cpp`
