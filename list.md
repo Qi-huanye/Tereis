@@ -6,7 +6,7 @@
 
 - [x] `_tWinMain` - `src/source/Tetris.cpp`
 - [x] `MyRegisterClass` - `src/source/Tetris.cpp`
-- [ ] `InitInstance` - `src/source/Tetris.cpp`
+- [x] `InitInstance` - `src/source/Tetris.cpp`
 - [ ] `WndProc` - `src/source/Tetris.cpp`
 - [ ] `About` - `src/source/Tetris.cpp`
 

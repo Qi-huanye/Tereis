@@ -71,9 +71,34 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     // TODO(作业3): 创建并显示主窗口。
-    UNREFERENCED_PARAMETER(hInstance);
-    UNREFERENCED_PARAMETER(nCmdShow);
-    return FALSE;
+    
+    RECT rect = { 0, 0, GRID * nWidth, GRID * nHeight };
+    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, TRUE);
+
+    hInst = hInstance;
+
+    HWND hWnd = CreateWindow(
+        szWindowClass,
+        szTitle,
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT,
+        0,
+        rect.right - rect.left,
+        rect.bottom - rect.top,
+        nullptr,
+        nullptr,
+        hInstance,
+        nullptr);
+
+    if (!hWnd)
+    {
+        return FALSE;
+    }
+
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
+
+    return TRUE;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
