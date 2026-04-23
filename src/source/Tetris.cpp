@@ -22,7 +22,28 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     // TODO(作业1): 补全 Win32 程序入口函数。
-    return 0;
+    LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+    LoadString(hInstance, IDC_TETRIS, szWindowClass, MAX_LOADSTRING);
+    MyRegisterClass(hInstance);
+
+    if (!InitInstance(hInstance, nCmdShow))
+    {
+        return FALSE;
+    }
+
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_TETRIS));
+    MSG msg;
+
+    while (GetMessage(&msg, nullptr, 0, 0))
+    {
+        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+    }
+
+    return (int)msg.wParam;
 }
 
 ATOM MyRegisterClass(HINSTANCE hInstance)
