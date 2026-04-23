@@ -17,7 +17,7 @@
 简要说明：先完成活动方块的基础移动可行性判断，为后续移动、旋转和落地逻辑提供前置条件。
 
 - [x] `6. CanMoveDown` - `src/source/TetrisLogic.cpp`
-- [ ] `7. CanMoveLeft` - `src/source/TetrisLogic.cpp`
+- [x] `7. CanMoveLeft` - `src/source/TetrisLogic.cpp`
 - [ ] `8. CanMoveRight` - `src/source/TetrisLogic.cpp`
 
 ## 第三阶段：方块移动与旋转

@@ -109,9 +109,43 @@ bool CanMoveDown()
     return true;
 }
 
+/**
+ * @brief 判断当前方块是否可以继续向左移动。
+ *
+ * 遍历当前处于活动状态下方块的 4x4 矩阵，计算其向左移动一步（X 坐标减 1）后的位置，
+ * 并检查每个非空方块单元：
+ * 1. 是否超出了游戏工作区的左侧边界（对应数组索引 < 0）。
+ * 2. 是否与工作区左侧已经固定的其他方块发生碰撞（即对应位置的值不为 0）。
+ * 如果遇到以上任意一种情况，则认为方块受到阻挡，无法继续左移。
+ *
+ * @return bool 如果可以继续安全左移返回 true，否则返回 false。
+ */
 bool CanMoveLeft()
 {
-    // TODO(作业7): 判断当前方块是否可以向左移动。
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (bricks[type][state][i][j] != 0)
+            {
+                int nextY = point.y + i;
+                int nextX = point.x + j - 1;
+
+                // 检查是否到达左侧边界
+                if (nextX < 0)
+                {
+                    return false;
+                }
+
+                // 检查左侧是否有其他固定方块
+                if (workRegion[nextY][nextX] != 0)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
     return true;
 }
 
