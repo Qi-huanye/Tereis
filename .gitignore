@@ -1,0 +1,49 @@
+# Build outputs
+/.vscode-build/
+/build/
+/bin/
+/obj/
+/out/
+/dist/
+
+# Executables and libraries
+*.exe
+*.dll
+*.lib
+*.a
+*.so
+*.dylib
+
+# Object and intermediate files
+*.o
+*.obj
+*.pch
+*.pdb
+*.ilk
+*.idb
+*.exp
+*.res
+
+# Logs and runtime dumps
+*.log
+*.tmp
+*.temp
+*.stackdump
+
+# IDE and editor user files
+.idea/
+*.suo
+*.user
+*.userossc
+*.vcxproj.user
+*.code-workspace
+
+# VS Code: keep shared project settings, ignore local history/cache
+.vscode/*.log
+.vscode/*.tmp
+.vscode/.ropeproject/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini

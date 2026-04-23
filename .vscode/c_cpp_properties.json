@@ -1,0 +1,19 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "MinGW",
+            "compilerPath": "g++.exe",
+            "intelliSenseMode": "windows-gcc-x64",
+            "cppStandard": "c++17",
+            "includePath": [
+                "${workspaceFolder}\\src"
+            ],
+            "defines": [
+                "UNICODE",
+                "_UNICODE",
+                "_WINDOWS"
+            ]
+        }
+    ]
+}

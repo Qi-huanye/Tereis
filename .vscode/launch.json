@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Tetris MinGW",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\.vscode-build\\mingw\\Tetris.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\src",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "preLaunchTask": "build Tetris MinGW"
+        }
+    ]
+}
